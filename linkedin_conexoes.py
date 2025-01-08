@@ -10,7 +10,7 @@ from random import randint
 
 # Função para iniciar o driver do Chrome
 def iniciar_driver():
-    print("Iniciando o driver do Chrome...")  # Log para verificar que a função está sendo chamada
+    print("Iniciando o driver do Chrome...") 
     chrome_options = Options()
 
     arguments = ['--lang=pt-BR', '--window-size=1100,800', '--incognito']
@@ -27,7 +27,7 @@ def iniciar_driver():
         # Iniciando o WebDriver
         print("Tentando iniciar o Chrome...")
         driver = webdriver.Chrome(options=chrome_options)
-        print("Driver do Chrome iniciado com sucesso!")  # Se chegou até aqui, o driver foi iniciado
+        print("Driver do Chrome iniciado com sucesso!")
     except Exception as e:
         print(f"Erro ao iniciar o driver: {e}")
         return None, None
@@ -45,17 +45,17 @@ def iniciar_driver():
 
 # Função principal para automação dos convites no LinkedIn
 def automatizar_convites_linkedin(cargo):
-    print("Iniciando a automação do LinkedIn...")  # Confirmação de início
+    print("Iniciando a automação do LinkedIn...") 
     try:
         driver, wait = iniciar_driver()
         if not driver:  # Se o driver não foi iniciado, sai da função
             print("Erro ao iniciar o navegador. Verifique a configuração.")
             return
 
-        # Passo 1: Login no LinkedIn - o usuário fará manualmente
+        # Passo 1: Login no LinkedIn de forma manual
         print("Faça o login no LinkedIn. A automação começará em instantes.")
         driver.get('https://www.linkedin.com/login/pt?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin')
-        sleep(40)  # Tempo para o usuário fazer login manualmente
+        sleep(40)  # Tempo para fazer login manualmente
 
         # Passo 2: Pesquisa pela profissão (cargo)
         campo_pesquisar = wait.until(condicao_esperada.visibility_of_element_located((By.XPATH, "//input[@placeholder='Pesquisar']")))
@@ -115,6 +115,6 @@ def automatizar_convites_linkedin(cargo):
             driver.quit()  # Fecha o navegador quando o limite de convites for alcançado
             break
 
-# Exemplo de uso:
-cargo = 'python'  # Cargo para buscar
+# Aqui é a busca pela profissão/cargo, no exemplo usei 'python'.
+cargo = 'python'  
 automatizar_convites_linkedin(cargo)
